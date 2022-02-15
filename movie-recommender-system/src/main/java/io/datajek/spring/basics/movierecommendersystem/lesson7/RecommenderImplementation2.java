@@ -1,0 +1,26 @@
+package io.datajek.spring.basics.movierecommendersystem.lesson7;
+
+import io.datajek.spring.basics.movierecommendersystem.lesson2.Filter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+public class RecommenderImplementation2 {
+    // autowiring by constructor method
+
+    private Filter filter;
+
+    @Autowired
+    @Qualifier("contentBasedFilter")
+    public void setFilter(Filter filter) {
+        System.out.println("ContentBasedFilter setter invoked..");
+        this.filter = filter;
+    }
+
+    public String[] recommendMovies(String movie){
+        // use ContentBased filter
+        String[] recommendedMovies=filter.getRecommendations("movie name");
+        return recommendedMovies;
+    }
+}
